@@ -1330,3 +1330,36 @@ class CartPerformance {
     );
   }
 }
+
+class NewHeader extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.menuIcon = this.querySelector(".new-header__menu-icon-container");
+    this.crossIcon = this.querySelector(".new-header__cross-icon-container");
+    this.drawerContainer = this.querySelector(".new-header__drawer-container");
+
+    if (this.menuIcon && this.crossIcon) {
+      this.menuIcon.addEventListener("click", () => this.openDrawer());
+      this.crossIcon.addEventListener("click", () => this.closeDrawer());
+    }
+  }
+
+  openDrawer() {
+    this.drawerContainer.style.height = this.drawerContainer.scrollHeight + "px";
+    this.drawerContainer.classList.add("open");
+    this.menuIcon.classList.add("hidden");
+    this.crossIcon.classList.remove("hidden");
+  }
+
+  closeDrawer() {
+    this.drawerContainer.style.height = "0";
+    this.drawerContainer.classList.remove("open");
+    this.crossIcon.classList.add("hidden");
+    this.menuIcon.classList.remove("hidden");
+  }
+}
+
+customElements.define("new-header", NewHeader);

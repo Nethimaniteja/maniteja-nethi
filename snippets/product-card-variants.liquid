@@ -1,0 +1,68 @@
+
+{% assign color_option_index = null %}
+{% assign size_option_index = null %}
+
+{% for option in product.options_with_values %}
+  {% assign name_downcased = option.name | downcase %}
+  {% if name_downcased contains 'color' %}
+    {% assign color_option_index = forloop.index0 %}
+  {% elsif name_downcased contains 'size' %}
+    {% assign size_option_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+<div class="variant-wrapper">
+  {% if color_option_index != null %}
+    <fieldset class="variant-container color-variants">
+      <legend class="variant-label">Color</legend>
+      <div class="variant-options color">
+        {% assign color_values = product.options_with_values[color_option_index].values %}
+        {% for color in color_values %}
+          {% assign color_id = 'color-' | append: forloop.index %}
+          <label class="color-swatch" for="{{ color_id }}">
+            <input
+              type="radio"
+              id="{{ color_id }}"
+              name="option{{ color_option_index | plus: 1 }}"
+              value="{{ color | escape }}"
+              class="color-input"
+            >
+            <span class="swatch-display" style="background-color: {{ color | downcase }};"></span>
+            <span class="swatch-label">{{ color }}</span>
+        </label>
+    {% endfor %}
+    <div class="color-variant-active"></div>
+      </div>
+    </fieldset>
+  {% endif %}
+
+  {% if size_option_index != null %}
+    <fieldset class="variant-container size-variants">
+      <legend class="variant-label">Size</legend>
+      <details class="size-dropdown">
+        <summary>
+          <span class="details-summary-text"> Choose your size </span>
+          <span class="details-summary-dropdown">
+            {% render 'icons', icon_name : 'dropdown-icon' %}
+          </span>
+        </summary>
+        <div class="size-dropdown-list">
+          {% assign size_values = product.options_with_values[size_option_index].values %}
+          {% for size in size_values %}
+            {% assign size_id = 'size-' | append: forloop.index %}
+            <label for="{{ size_id }}">
+              <input
+                type="radio"
+                id="{{ size_id }}"
+                name="option{{ size_option_index | plus: 1 }}"
+                value="{{ size | escape }}"
+                class="size-input"
+              >
+              <span class="size-label">{{ size }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </details>
+    </fieldset>
+  {% endif %}
+</div>

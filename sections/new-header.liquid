@@ -1,0 +1,208 @@
+{% style %}
+  .section-padding-{{section.id }} {
+     padding-top: {{ section.settings.padding_top_mobile  | append: 'px'}};
+     padding-bottom: {{ section.settings.padding_bottom_mobile | append: 'px'}};
+   }
+   @media screen and (min-width:750px){
+     .section-padding-{{section.id }} {
+       padding-top: {{ section.settings.padding_top_desktop | append: 'px'}};
+       padding-bottom: {{ section.settings.padding_bottom_desktop | append: 'px' }};
+     }
+   }
+{% endstyle %}
+
+<div class="new-header new-header__main-container">
+  <div class="cusom-header__wrapper">
+    {% capture button %}
+        {% if section.settings.navigation_url %}
+            <a href="{{ section.settings.navigation_url }}">
+              <button
+                class="new-header-button"
+                type="button"
+              >
+                <span class="transition-effect"> </span>
+                <span class="button-text">
+                  {{ section.settings.button_text }}
+                </span>
+                <span class="new-header__right-icon-container">
+                  {% render 'icons', icon_name : 'arrow_icon' %}
+                </span>
+              </button>
+            </a>
+          {% else %}
+            <button
+              class="new-header-button"
+              type="button"
+              disabled
+            >
+              <span class="transition-effect"> </span>
+              <span class="button-text">
+                {{ section.settings.button_text }}
+              </span>
+              <span class="new-header__right-icon-container">
+                  {% render 'icons', icon_name : 'arrow_icon' %}
+              </span>
+            </button>
+          {% endif %}
+    {% endcapture %}
+    <new-header>
+      <header class="new-header__container page-width section-padding-{{section.id }} color-{{ section.settings.color_scheme }}">
+        <div class="new-header__menu large-up-hide">
+          <div class="menu-icons-container">
+            <span class="new-header__menu-icon-container">
+              {% render 'icons', icon_name : 'menu_icon' %}
+            </span>
+            <span class="new-header__cross-icon-container hidden">
+               {% render 'icons', icon_name : 'cross_icon' %}
+            </span>
+          </div>
+        </div>
+        {% if section.settings.image != blank or section.settings.heading != blank %}
+          <div class="new-header__logo-container">
+            <h1 class="new-header-logo">
+              <a href="{{ shop.url }}">
+                {% if section.settings.image != blank %}
+                  <img src="{{ section.settings.image | image_url }}" height="auto" width="auto">
+                {% elsif section.settings.heading != blank %}
+                  <span class="h2">{{ section.settings.heading }}</span>
+                {% endif %}
+              </a>
+            </h1>
+          </div>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="new-header__description-conatiner small-hide medium-hide">
+            <p class="new-header__description">
+              {{ section.settings.description }}
+            </p>
+          </div>
+        {% endif %}
+        {% if button %}
+          <div class="new-header__button-conatiner small-hide medium-hide">
+            {{ button }}
+          </div>
+        {% endif %}
+      </header>
+      <div class="new-header__drawer-container color-{{ section.settings.drawer_color_scheme }} large-up-hide">
+        <div class="header-drawer-warpper">
+          {% if section.settings.description != blank %}
+            <div class="new-header__drawer-description">
+              <p class="new-header__description">
+                {{ section.settings.description }}
+              </p>
+            </div>
+          {% endif %}
+          {% if button %}
+            <div class="new-header__drawer-button">
+              {{ button }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </new-header>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.new-header.name",
+  "class": "new-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.new-header.settings.content_customization"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "drawer_color_scheme",
+      "label": "t:sections.new-header.settings.drawer_color_scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.new-header.settings.image_label",
+      "info": "t:sections.new-header.settings.image_info"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "t:sections.new-header.settings.heading",
+      "info":"t:sections.new-header.settings.heading_info"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "t:sections.new-header.settings.description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "t:sections.new-header.settings.button_text"
+    },
+    {
+      "type": "url",
+      "id": "navigation_url",
+      "label": "t:sections.new-header.settings.navigation_url"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.new-header.settings.padding_customization"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "t:sections.new-header.settings.padding_top_desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "t:sections.new-header.settings.padding_bottom_desktop"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "t:sections.new-header.settings.padding_top_mobile"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "t:sections.new-header.settings.padding_bottom_mobile"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.new-header.presets.name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+{% comment %}
+  Renders icons.
+  Accepts:
+  - icon_name: {String} Icon Name.
+  - class: {String} Icon Class.
+
+  Usage:
+  {% render 'icons', icon_name: icon_name, class: class %}
+
+   Example:
+   {%- render 'icons',
+    icon_name: 'quality_icon',
+    class: 'icon'
+  -%}
+{% endcomment %}
+
+{% case icon_name %}
+  {% when 'hotspot_icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <circle cx="11" cy="11" r="11" fill="#F8F8F8" fill-opacity="0.9"></circle>
+      <path d="M11.3457 7.04175V15.5033" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"></path>
+      <path d="M7.11523 11.2725H15.5768" stroke="black" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"></path>
+    </svg>
+  {% when 'arrow_icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="12" viewBox="0 0 36 12" fill="none">
+      <path d="M1.4093 5.25L0.659302 5.25L0.659302 6.75L1.4093 6.75L1.4093 5.25ZM35.6391 6.53033C35.932 6.23744 35.932 5.76257 35.6391 5.46967L30.8661 0.696701C30.5733 0.403808 30.0984 0.403808 29.8055 0.696701C29.5126 0.989594 29.5126 1.46447 29.8055 1.75736L34.0481 6L29.8055 10.2426C29.5126 10.5355 29.5126 11.0104 29.8055 11.3033C30.0984 11.5962 30.5732 11.5962 30.8661 11.3033L35.6391 6.53033ZM1.4093 6.75L35.1088 6.75L35.1088 5.25L1.4093 5.25L1.4093 6.75Z" fill="currentColor"></path>
+    </svg>
+  {% when 'close_icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M5.03809 4.94354L13.5234 13.4288" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"></path>
+      <path d="M5.03809 13.4285L13.5234 4.94325" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="round"></path>
+    </svg>
+  {% when 'cross_icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+      <path d="M1 13.9994L13.7279 1.2715" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1 1L13.7279 13.7279" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  {% when 'menu_icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+      <path d="M1 6H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1 1H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M1 11H19" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  {% when 'dropdown-icon' %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none">
+      <path d="M2 2L8 8L14 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"></path>
+    </svg>
+{% endcase %}
