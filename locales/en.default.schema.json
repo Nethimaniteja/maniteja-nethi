@@ -364,6 +364,112 @@
     }
   },
   "sections": {
+    "new-header": {
+      "name": "New Header",
+      "presets": {
+        "name": "New Header"
+      },
+      "settings": {
+        "drawer_color_scheme":"Drawer color scheme",
+        "content_customization": "Content Customization",
+        "image_label": "Image",
+        "image_info": "Recommended Dimensions 150px x 20px",
+        "heading": "Heading",
+        "heading_info":"Add Logo text to display in place of the logo. This will appear if no logo image is provided",
+        "description": "Description",
+        "button_text": "Button Text",
+        "navigation_url": "Button Navigation",
+        "padding_customization": "Section padding",
+        "padding_top_desktop": "Top padding (desktop)",
+        "padding_bottom_desktop": "Bottom padding (desktop)",
+        "padding_top_mobile": "Top padding (mobile)",
+        "padding_bottom_mobile": "Bottom padding (mobile)"
+      }
+    },
+     "hero-banner": {
+      "name": "Hero Banner",
+      "settings": {
+        "color_scheme": "Color scheme",
+        "section_width": "Section width",
+        "section_width__full_width": "Full width",
+        "section_width__page_width": "Page width",
+        "section_padding": "Section padding",
+        "padding_top_desktop": "Top padding (desktop)",
+        "padding_bottom_desktop": "Bottom padding (desktop)",
+        "padding_top_mobile": "Top padding (mobile)",
+        "padding_bottom_mobile": "Bottom padding (mobile)"
+      },
+      "blocks": {
+        "image_with_text": {
+          "name": "Image with text",
+          "settings": {
+            "desktop_image": "Desktop image",
+            "mobile_image": "Mobile image",
+            "mobile_image_info":"If you want to display the same image for mobile, upload the desktop image here as well.",
+            "desktop_heading": "Heading (desktop)",
+            "desktop_description": "Description (desktop)",
+            "mobile_heading": "Heading (mobile)",
+            "mobile_description": "Description (mobile)",
+            "button_text": "Button text",
+            "button_url": "Button URL",
+            "show_button_on_image_mobile":"Show button on Image(mobile)"
+          }
+        },
+        "image": {
+          "name": "Image",
+          "settings": {
+            "desktop_image": "Desktop image",
+            "mobile_image": "Mobile image",
+          }
+        },
+        "announcement":{
+          "name":"Annocement"
+        }
+      },
+      "presets": {
+        "name": "Hero banner",
+        "category": "Custom"
+      }
+    },
+    "hotspot": {
+      "name": "Hotspot",
+      "settings": {
+        "color_scheme": "Color Scheme",
+        "heading": "Heading",
+        "no_of_items_per_mobile": "No of items per mobile",
+        "one":"one",
+        "two":"two",
+        "add_on_product":"Add on Product",
+        "add_extra_product":"Enable Extra Product Add-on",
+        "matched_variants":"Matching Variant Conditions",
+        "matched_variants_info":"Enter variant conditions using format: Size|Color (e.g., M|Black). Use capital/lowercase exactly as in your product variant options.",
+        "add_extra_product_info":"Enable this option to automatically add an extra product when matching variant conditions are met.",
+        "extra_product_info":"Select the product that will be added to the cart when a matching variant is detected.",
+        "items_per_desktop": "Items per row (Desktop)",
+        "desktop_gap": "Gap between images desktop",
+        "mobile_gap": "Gap between images mobile",
+        "section_padding":"Section padding",
+        "padding_top_desktop": "Top Padding (Desktop)",
+        "padding_bottom_desktop": "Bottom Padding (Desktop)",
+        "padding_top_mobile": "Top Padding (Mobile)",
+        "padding_bottom_mobile": "Bottom Padding (Mobile)"
+      },
+      "blocks": {
+        "hotspot": {
+          "name": "Hotspot product",
+          "settings": {
+            "image": "Image",
+            "position_top": "Hotspot Position Top (%)",
+            "position_left": "Hotspot Position Left (%)",
+            "selected_product": "Select Product"
+          }
+        }
+      },
+      "presets": {
+        "name": "Hotspot",
+        "category": "Custom"
+      }
+    },
     "all": {
       "animation": {
         "content": "Animations",

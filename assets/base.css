@@ -3595,3 +3595,116 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+.new-header__container {
+  display: grid;
+  grid-template-areas: "menu logo";
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  box-shadow: #0000001a 0 4px 12px;
+}
+.new-header__menu {
+  grid-area: menu;
+}
+.new-header__logo-container {
+  grid-area: logo;
+  justify-self: center;
+}
+.new-header__description-conatiner {
+  grid-area: description;
+  justify-self: center;
+}
+.new-header__button-conatiner {
+  grid-area: button;
+}
+.new-header-logo,
+.new-header-logo p,
+.new-header-logo a,
+.new-header__description,
+.new-header-logo a {
+  font-family: "jost";
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  display: flex;
+}
+.header-drawer-warpper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 16px;
+}
+.new-header__drawer-description {
+  font-family: "jost";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 13px;
+  letter-spacing: 0px;
+}
+.new-header-button {
+  min-width: 244px;
+  min-height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: #fff544;
+  color: rgba(var(--color-button), var(--alpha-button-background));
+  box-shadow: none;
+  border: none;
+  position: relative;
+  cursor: pointer;
+}
+.new-header-button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+.new-header__right-icon-container,
+.new-header__drawer-button a,
+.new-header__button-conatiner a {
+  display: flex;
+  text-decoration: none;
+}
+.new-header-button .button-text {
+  font-family: "jost";
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+}
+.transition-effect {
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(var(--color-button), var(--alpha-button-background));
+  transition: all 0.3s linear;
+}
+.new-header-button:hover .transition-effect {
+  width: 100%;
+}
+.new-header-button:hover .button-text,
+.new-header-button:hover .new-header__right-icon-container {
+  z-index: 2;
+  color: rgb(var(--color-button-text));
+}
+.new-header__cross-icon-container,
+.new-header__menu-icon-container {
+  cursor: pointer;
+}
+.new-header__drawer-container {
+  height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+}
+@media screen and (min-width: 990px) {
+  .new-header__container {
+    grid-template-areas: "logo description button";
+    grid-template-columns: auto 1fr auto;
+  }
+  .new-header-button {
+    min-width: 207px;
+  }
+}

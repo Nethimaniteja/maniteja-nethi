@@ -267,6 +267,9 @@
     }
   },
   "sections": {
+    "hotspot": {
+      "error_message": "Please select variants"
+    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",

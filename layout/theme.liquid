@@ -41,6 +41,37 @@
 
     {{ content_for_header }}
 
+    {%- style -%}
+      @font-face {
+          font-family: "jost";
+          font-style: normal;
+          font-weight: 300;
+          font-display: swap;
+          src: url("{{'Jost-Light.ttf' | asset_url }}");
+      }
+      @font-face {
+          font-family: "jost";
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url("{{'Jost-Regular.ttf' | asset_url }}");
+      }
+      @font-face {
+          font-family: "jost";
+          font-style: normal;
+          font-weight: 500;
+          font-display: swap;
+          src: url("{{'Jost-Medium.ttf' | asset_url }}");
+      }
+      @font-face {
+          font-family: "Lustria";
+          font-style: normal;
+          font-weight: 400;
+          font-display: swap;
+          src: url("{{'Lustria-Regular.ttf' | asset_url }}");
+      }
+    {%- endstyle -%}
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'

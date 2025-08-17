@@ -1,0 +1,360 @@
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .section-padding-{{section.id }} {
+     padding-top: {{ section.settings.padding_top_mobile  | append: 'px'}};
+     padding-bottom: {{ section.settings.padding_bottom_mobile | append: 'px'}};
+   }
+   @media screen and (min-width:750px){
+     .section-padding-{{section.id }} {
+       padding-top: {{ section.settings.padding_top_desktop | append: 'px'}};
+       padding-bottom: {{ section.settings.padding_bottom_desktop | append: 'px' }};
+     }
+   }
+{% endstyle %}
+
+<div class="hero-banner section-padding-{{ section.id }} color-{{ section.settings.color_scheme }}">
+  <div class="hero-banner-wrapper {% if section.settings.section_width == "page_width" %}page-width{% endif %}">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'image' %}
+            <div class="hero-banner__image-wrapper">
+              {% if block.settings.mobile_image != blank %}
+                <div class="hero-banner__image medium-hide large-up-hide">
+                  <img
+                    src="{{ block.settings.mobile_image | image_url }}"
+                    width="100%"
+                    height="auto"
+                    alt="{{ block.settings.mobile_image.alt }}"
+                  >
+                </div>
+              {% endif %}
+              {% if block.settings.desktop_image != blank %}
+                <div class="hero-banner__image-wrapper small-hide">
+                  <img
+                    src="{{ block.settings.desktop_image | image_url }}"
+                    width="100%"
+                    height="auto"
+                    alt="{{ block.settings.desktop_image.alt }}"
+                  >
+                </div>
+              {% endif %}
+            </div>
+
+          {% when 'image_with_text' %}
+            {% capture button %}
+                {% if block.settings.button_url != blank %}
+                    <a href="{{ block.settings.button_url }}" class="hero-banner__link">
+                    <button class="hero-banner__button">
+                        <span class="button-transition"></span>
+                        <span class="button-text">{{ block.settings.button_text }}</span>
+                        <span class="button-arrow">{% render 'icons', icon_name : 'arrow_icon' %}</span>
+                    </button>
+                    </a>
+                {% else %}
+                    <button class="hero-banner__button" disabled>
+                        <span class="button-text">{{ block.settings.button_text }}</span>
+                        <span class="button-arrow">{% render 'icons', icon_name : 'arrow_icon' %}</span>
+                    </button>
+                {% endif %}
+            {% endcapture %}
+            <div class="hero-banner__image-text-wrapper">
+              <div class="hero-banner__text-container">
+                <div class="hero-banner__mobile-text-container medium-hide large-up-hide">
+                  {% if block.settings.mobile_heading != blank %}
+                    <h2 class="hero-banner__heading">
+                      {{ block.settings.mobile_heading }}
+                    </h2>
+                  {% endif %}
+                  {% if block.settings.mobile_description != blank %}
+                    <p class="hero-banner__description">
+                      {{ block.settings.mobile_description }}
+                    </p>
+                  {% endif %}
+                  {% if button %}
+                    <div class="hero-banner__button-container {% if block.settings.show_button_on_image_mobile %}small-hide{% endif %}">
+                      {{ button }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="hero-banner__desktop-text-container small-hide">
+                  {% if block.settings.desktop_heading != blank %}
+                    <h2 class="hero-banner__heading">
+                      {{ block.settings.desktop_heading }}
+                    </h2>
+                  {% endif %}
+                  {% if block.settings.desktop_description != blank %}
+                    <p class="hero-banner__description">
+                      {{ block.settings.desktop_description }}
+                    </p>
+                  {% endif %}
+                  {% if button %}
+                    <div class="hero-banner__button-container">
+                      {{ button }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="hero-banner__image-container">
+                {% if block.settings.mobile_image != blank %}
+                  <div class="hero-banner__mobile-image medium-hide large-up-hide">
+                    <img
+                      src="{{ block.settings.mobile_image | image_url }}"
+                      width="100%"
+                      height="auto"
+                      alt="{{ block.settings.mobile_image.alt }}"
+                    >
+                  </div>
+                {% endif %}
+                {% if block.settings.desktop_image != blank %}
+                  <div class="hero-banner__desktop-image small-hide">
+                    <img
+                      src="{{ block.settings.desktop_image | image_url }}"
+                      width="100%"
+                      height="auto"
+                      alt="{{ block.settings.desktop_image.alt }}"
+                    >
+                  </div>
+                {% endif %}
+                {% if button %}
+                  <div class="hero-banner__button_on_image {% if block.settings.show_button_on_image_mobile %}medium-hide large-up-hide{% else %} hidden {% endif %}">
+                    {{ button }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% when 'annoucement' %}
+            {% if block.settings.annoucement_desktop_heading != blank
+              or block.settings.annoucement_mobile_heading != blank
+            %}
+              <div class="hero-banner__annocement page-width color-{{ block.settings.annoucement_color_scheme }}">
+                <div class="hero-banner__annocement-wrapper">
+                  {% if block.settings.annoucement_desktop_heading != blank %}
+                    <div class="hero-banner__annocement-container small-hide">
+                      {{ block.settings.annoucement_desktop_heading }}
+                    </div>
+                  {% endif %}
+                  {% if block.settings.annoucement_mobile_heading != blank %}
+                    <div class="hero-banner__annocement-container medium-hide large-up-hide">
+                      {{ block.settings.annoucement_mobile_heading }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+        {% endcase %}
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.hero-banner.name",
+  "class": "hero-banner",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.hero-banner.settings.color_scheme",
+      "default": "schema_1"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:sections.hero-banner.settings.section_width",
+      "options": [
+        {
+          "value": "full_width",
+          "label": "t:sections.hero-banner.settings.section_width__full_width"
+        },
+        {
+          "value": "page_width",
+          "label": "t:sections.hero-banner.settings.section_width__page_width"
+        }
+      ],
+      "default": "full_width"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.hero-banner.settings.section_padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "t:sections.hero-banner.settings.padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "t:sections.hero-banner.settings.padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "t:sections.hero-banner.settings.padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "t:sections.hero-banner.settings.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "step": 1,
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_with_text",
+      "limit": 1,
+      "name": "t:sections.hero-banner.blocks.image_with_text.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.desktop_image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.mobile_image"
+        },
+        {
+          "type": "richtext",
+          "id": "desktop_heading",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.desktop_heading",
+          "default": "<p>The Gift Guide</p>"
+        },
+        {
+          "type": "text",
+          "id": "desktop_description",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.desktop_description",
+          "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+        },
+        {
+          "type": "richtext",
+          "id": "mobile_heading",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.mobile_heading",
+          "default": "<p>The Gift Guide</p>"
+        },
+        {
+          "type": "text",
+          "id": "mobile_description",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.mobile_description",
+          "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.button_text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.button_url"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button_on_image_mobile",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.show_button_on_image_mobile",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "limit": 1,
+      "name": "t:sections.hero-banner.blocks.image.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "desktop_image",
+          "label": "t:sections.hero-banner.blocks.image.settings.desktop_image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "t:sections.hero-banner.blocks.image.settings.mobile_image"
+        }
+      ]
+    },
+    {
+      "type": "annoucement",
+      "limit": 1,
+      "name": "t:sections.hero-banner.blocks.announcement.name",
+      "settings": [
+        {
+          "type": "color_scheme",
+          "id": "annoucement_color_scheme",
+          "label": "t:sections.hero-banner.settings.color_scheme",
+          "default": "schema_1"
+        },
+        {
+          "type": "richtext",
+          "id": "annoucement_desktop_heading",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.desktop_heading",
+          "default": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "annoucement_mobile_heading",
+          "label": "t:sections.hero-banner.blocks.image_with_text.settings.mobile_heading",
+          "default": "<p>SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.hero-banner.presets.name",
+      "category": "t:sections.hero-banner.presets.category",
+      "settings": {
+        "color_scheme": "schema_1",
+        "section_width": "full_width",
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      },
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image_with_text",
+          "settings": {
+            "desktop_heading": "<p>The Gift Guide</p>",
+            "desktop_description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+            "mobile_heading": "<p>The Gift Guide</p>",
+            "mobile_description": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+            "button_text": "Shop Now",
+            "button_url": "#"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
